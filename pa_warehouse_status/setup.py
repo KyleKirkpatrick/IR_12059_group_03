@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'hand_solo_virtual_nav'
+package_name = 'pa_warehouse_status'
 
 setup(
     name=package_name,
@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'hs_waypoint_follower = hand_solo_virtual_nav.hs_waypoint_follower:main'
+            'pineapple_gossip_bot = pa_warehouse_status.pineapple_gossip_bot:main',
+            'plc_hmi_listener = pa_warehouse_status.plc_hmi_listener:main',
         ],
     },
 )

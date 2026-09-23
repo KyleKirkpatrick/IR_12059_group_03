@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>hand_solo_virtual_nav</name>
+  <name>pa_warehouse_status</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="u3299535@uni.canberra.edu.au">root</maintainer>
