@@ -6,7 +6,7 @@ amcl:
     alpha3: 0.2
     alpha4: 0.2
     alpha5: 0.2
-    base_frame_id: base_link
+    base_frame_id: virtual_hand_solo/base_link
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
@@ -20,7 +20,7 @@ amcl:
     max_beams: 60
     max_particles: 2000
     min_particles: 500
-    odom_frame_id: "odom"
+    odom_frame_id: "virtual_hand_solo/odom"
     pf_err: 0.05
     pf_z: 0.99
     recovery_alpha_fast: 0.0
@@ -39,14 +39,14 @@ amcl:
     z_short: 0.05
     set_initial_pose: True
     initial_pose: [0.0, 0.0, 0.0, 0.0]
-    scan_topic: virtual_hand_solo/scan
+    scan_topic: /virtual_hand_solo/scan
 
 bt_navigator:
   ros__parameters:
     use_sim_time: false
     global_frame: map
     robot_base_frame: virtual_hand_solo/base_link
-    odom_topic: virtual_hand_solo/odom
+    odom_topic: /virtual_hand_solo/odom
     bt_loop_duration: 10
     default_server_timeout: 20
     wait_for_service_timeout: 1000
@@ -129,7 +129,7 @@ local_costmap:
     ros__parameters:
       update_frequency: 20.0
       publish_frequency: 10.0
-      global_frame: odom
+      global_frame: virtual_hand_solo/odom
       robot_base_frame: virtual_hand_solo/base_link
       use_sim_time: false
       rolling_window: true
@@ -153,7 +153,7 @@ local_costmap:
         mark_threshold: 0
         observation_sources: scan
         scan:
-          topic: virtual_hand_solo/scan
+          topic: /virtual_hand_solo/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
@@ -181,7 +181,7 @@ global_costmap:
         enabled: True
         observation_sources: scan
         scan:
-          topic: virtual_hand_solo/scan
+          topic: /virtual_hand_solo/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
@@ -232,7 +232,7 @@ behavior_server:
       plugin: "nav2_behaviors::Wait"
     assisted_teleop:
       plugin: "nav2_behaviors::AssistedTeleop"
-    local_frame: odom
+    local_frame: virtual_hand_solo/odom
     global_frame: map
     robot_base_frame: virtual_hand_solo/base_link
     transform_tolerance: 0.4
@@ -259,7 +259,7 @@ velocity_smoother:
     smoothing_frequency: 50.0
     scale_velocities: false
     feedback: "OPEN_LOOP"
-    odom_topic: "/odom"
+    odom_topic: "/virtual_hand_solo/odom"
     odom_duration: 0.2
     max_velocity: [1.0, 0.0, 0.5]
     min_velocity: [-1.0, 0.0, -0.5]
