@@ -49,7 +49,9 @@ docker system prune -a
 # Step inside omron-handsolo container
 docker exec -it omron_handsolo bash
 
-
+# Add local user to docker group (so you don't need sudo for every command)
+sudo usermod -aG docker $USER
+newgrp docker   # Refreshes list
 
 #----------------------------------------------------------------------#
 # Git commands
