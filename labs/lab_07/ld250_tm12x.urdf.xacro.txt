@@ -1,0 +1,79 @@
+./omron_ws/install/handsolo_description/share/handsolo_description/xacro/ld250_tm12x.urdf.xacro                                                                                            
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ld250_tm12x">
+
+  <xacro:arg name="ns" default=""/>
+  <xacro:arg name="arm_prefix" default=""/>
+  <xacro:arg name="base_prefix" default="virtual_hand_solo/"/>
+  <xacro:arg name="arm_color" default="none"/>
+  <xacro:arg name="trans_hw_iface" default="hardware_interface/PositionJointInterface"/>
+  <xacro:arg name="arm_base_link" default="base_link"/>
+  <xacro:arg name="controlbox_mesh_pkg" default="moma_description"/>
+
+  <xacro:include filename="$(find handsolo_description)/xacro/ld250.urdf.xacro"/>
+  <xacro:ld250 prefix="$(arg base_prefix)" mesh_pkg="amr_description"/>
+
+  <xacro:include filename="$(find tm_description)/xacro/macro.gazebo.xacro" />
+  <xacro:include filename="$(find tm_description)/xacro/macro.transmission.xacro" />
+  <xacro:include filename="$(find tm_description)/xacro/macro.tm12x-nominal.urdf.xacro" />
+  <xacro:include filename="$(find moma_description)/xacro/controlbox_ld250.urdf.xacro"/>
+
+  <xacro:property name="arm_color_val" value="$(arg arm_color)"/>
+  <xacro:property name="tm_effective_arm_color" value="${
+    'moma_tm_none' if arm_color_val == 'none' else
+    'moma_tm_lightgrey' if arm_color_val == 'lightgrey' else
+    'moma_tm_grey' if arm_color_val == 'grey' else
+    'moma_tm_white' if arm_color_val == 'white' else
+    'moma_tm_red' if arm_color_val == 'red' else
+    'moma_tm_orange' if arm_color_val == 'orange' else
+    'moma_tm_yellow' if arm_color_val == 'yellow' else
+    'moma_tm_green' if arm_color_val == 'green' else
+    'moma_tm_blue' if arm_color_val == 'blue' else
+    'moma_tm_indigo' if arm_color_val == 'indigo' else
+    'moma_tm_violet' if arm_color_val == 'violet' else
+    'moma_tm_black' if arm_color_val == 'black' else
+    'moma_tm_darkolive' if arm_color_val == 'darkolive' else
+    arm_color_val
+  }"/>
+
+  <material name="moma_tm_none"><color rgba="0.0 0.0 0.0 1.0" /></material>
+  <material name="moma_tm_lightgrey"><color rgba="0.5 0.5 0.5 1.0" /></material>
+  <material name="moma_tm_grey"><color rgba="0.75 0.75 0.75 1.0" /></material>
+  <material name="moma_tm_white"><color rgba="0.95 0.95 0.95 1.0" /></material>
+  <material name="moma_tm_red"><color rgba="0.95 0.0 0.0 1.0" /></material>
+  <material name="moma_tm_orange"><color rgba="1.0 0.5 0.0 1.0" /></material>
+  <material name="moma_tm_yellow"><color rgba="1.0 1.0 0.0 1.0" /></material>
+  <material name="moma_tm_green"><color rgba="0.0 1.0 0.0 1.0" /></material>
+  <material name="moma_tm_blue"><color rgba="0.0 0.0 1.0 1.0" /></material>
+  <material name="moma_tm_indigo"><color rgba="0.3 0.3 0.6 1.0" /></material>
+  <material name="moma_tm_violet"><color rgba="0.6 0.0 1.0 1.0" /></material>
+  <material name="moma_tm_black"><color rgba="0.0 0.0 0.0 1.0" /></material>
+  <material name="moma_tm_darkolive"><color rgba="0.3 0.3 0.25 1.0" /></material>
+
+  <xacro:tmr_gazebo ns="$(arg ns)" prefix="$(arg arm_prefix)" />
+  <xacro:tmr_transmission prefix="$(arg arm_prefix)" hw_iface="$(arg trans_hw_iface)" />
+
+  <xacro:if value="${arm_color_val == 'none'}">
+    <xacro:tm12x ns="$(arg ns)" prefix="$(arg arm_prefix)" color="${tm_effective_arm_color}"/>
+  </xacro:if>
+  <xacro:unless value="${arm_color_val == 'none'}">
+    <xacro:tm12x ns="$(arg ns)" prefix="$(arg arm_prefix)" color="${tm_effective_arm_color}" format="stl"/>
+  </xacro:unless>
+
+  <xacro:controlbox_ld250 mesh_pkg="$(arg controlbox_mesh_pkg)" link_name="controlbox"/>
+
+  <joint name="ld250_to_controlbox" type="fixed">
+    <parent link="$(arg base_prefix)base_link"/>
+    <child link="controlbox"/>
+    <origin xyz="0 0 0.38" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="controlbox_to_tm12x_mount" type="fixed">
+    <parent link="controlbox"/>
+    <child link="$(arg arm_prefix)base"/>
+    <origin xyz="0.21 0 0.33" rpy="0 0 0"/>
+  </joint>
+
+</robot>
+
