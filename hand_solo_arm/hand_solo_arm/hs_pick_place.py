@@ -70,8 +70,8 @@ class HSWaypointRunner(Node):
         if not self._send_and_wait([0.0, -75.0, 140.0, 280, 0.0, 0.0]): return
         time.sleep(5)
 
-        # Waypoint 3
-        if not self._send_and_wait([0.785, -0.8, 1.4, 0.0, 0.8, 0.0]): return
+        # Waypoint 3: place position
+        if not self._send_and_wait([0.0, 43.0, 46.0, 0.0, 0.0, 0.0]): return
         time.sleep(1.5)
 
         # Waypoint 4
