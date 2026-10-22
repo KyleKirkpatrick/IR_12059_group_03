@@ -88,24 +88,24 @@ def main():
     wp1 = make_pose(0.0, 0.0, 0.0)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0
 
-    wp2 = make_pose(4.3, 3.4, 0.00247)          # Sample goal pose. Make your own! You can create multiple way points
+    wp2 = make_pose(-1.28, -0.0659, 0.00247)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0
     
-    wp3 = make_pose(6.5, -0.24, 0.00247)          # Sample goal pose. Make your own! You can create multiple way points
+    wp3 = make_pose(3.83, -2.25, -0.00143)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0 
     
-    wp4 = make_pose(21.1, 0.403, 0.00247)          # Sample goal pose. Make your own! You can create multiple way points
+    wp4 = make_pose(7.11, 0.0877, 0.00256)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0  
     
-    wp5 = make_pose(30.9, 1.62, 0.00247)          # Sample goal pose. Make your own! You can create multiple way points
+    wp5 = make_pose(20.3, -0.0293, -0.00143)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0                   # How long to wait at each waypoint
 
     # 3. Go to first waypoint
     send_and_wait(wp1)
     send_and_wait(wp2)
-    send_and_wait(wp3)
-    send_and_wait(wp4)
-    send_and_wait(wp5)
+    
+    #send_and_wait(wp4)
+    #send_and_wait(wp5)
 
 
     # 4. Pause to simulate "waiting at waypoint"
@@ -116,7 +116,9 @@ def main():
     
 
     # 5. Go to other waypoints and delays if you want
-
+    send_and_wait(wp3)
+    node.get_logger().info(f'Waiting {wait_seconds:.0f} seconds at waypoint 2...')
+    time.sleep(3)
 
     # --- Your custom code ends here ---
 
