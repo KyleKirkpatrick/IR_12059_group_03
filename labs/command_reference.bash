@@ -48,6 +48,9 @@ docker compose pull
 # Start container
 docker compose up
 
+# Start irs_world with alternate Nvidia compose file
+docker compose -f compose-nvidia.yaml up
+
 # Stop running container
 # key command [ctrl] + [c]
 # wait for the applications to gracefully stop, or do again to force quit
