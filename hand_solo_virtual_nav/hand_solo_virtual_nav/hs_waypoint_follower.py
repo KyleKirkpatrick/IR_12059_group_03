@@ -85,24 +85,23 @@ def main():
 
     # --- Hard-coded waypoints for this lab. Edit this section in the code and make it your own ---
 
-    wp1 = make_pose(0.0, 0.0, 0.0)          # Sample goal pose. Make your own! You can create multiple way points
+    wp1 = make_pose(30.0, -0.04, -0.00143)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0
 
-    wp2 = make_pose(-1.28, -0.0659, 0.00247)          # Sample goal pose. Make your own! You can create multiple way points
+    wp2 = make_pose(5.0, -0.04, -0.00143)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0
     
-    wp3 = make_pose(3.83, -2.25, -0.00143)          # Sample goal pose. Make your own! You can create multiple way points
+    wp3 = make_pose(0.0, 0.0, 0.0)             # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0 
     
-    wp4 = make_pose(7.11, 0.0877, 0.00256)          # Sample goal pose. Make your own! You can create multiple way points
+    wp4 = make_pose(0.0, 0.0, 0.0)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0  
     
-    wp5 = make_pose(20.3, -0.0293, -0.00143)          # Sample goal pose. Make your own! You can create multiple way points
+    wp5 = make_pose(0.0, 0.0, 0.0)          # Sample goal pose. Make your own! You can create multiple way points
     wait_seconds = 5.0                   # How long to wait at each waypoint
 
     # 3. Go to first waypoint
     send_and_wait(wp1)
-    send_and_wait(wp2)
     
     #send_and_wait(wp4)
     #send_and_wait(wp5)
@@ -114,10 +113,14 @@ def main():
     # Add some sort of delay functionality. Look up pythons time module
     time.sleep(3)
     
-
+    
+    send_and_wait(wp2)
+    node.get_logger().info(f'Waiting {wait_seconds:.0f} seconds at waypoint 2...')
+    time.sleep(3)
+    
     # 5. Go to other waypoints and delays if you want
     send_and_wait(wp3)
-    node.get_logger().info(f'Waiting {wait_seconds:.0f} seconds at waypoint 2...')
+    node.get_logger().info(f'Waiting {wait_seconds:.0f} seconds at waypoint 3...')
     time.sleep(3)
 
     # --- Your custom code ends here ---
