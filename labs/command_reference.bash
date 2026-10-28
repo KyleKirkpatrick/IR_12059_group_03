@@ -18,6 +18,21 @@ find ./ -type f -name "*.urdf*"
 # Display file contents to terminal
 cat [filename]
 
+# Copy protected files
+sudo cp -r [source-file-path] [destination-file path]
+# sudo      : run elevated as root
+# cp        : copy
+# -r        : recursive (copies all files in the folder and subfolders)
+
+# COPYING THE PLC SOLUTION INTO YOUR DOCKER CONTAINER
+# In your irs_world folder there is a folder called "openplc-editor"
+# openplc-editor/data has a symbolic link to the "editor-data" folder in the OpenPLC docker container
+# Download the PLC solution from our github repo: 
+IR_12059_group_03/labs/lab_03/plc_lab_03
+# openplc-edit/data is a protected folder. You need root permission to copy there. 
+# Adapt the cp command above to copy plc_lab_03 to openplc-edit/data
+# Once copied, you can open the PLC solution in OpenPLC editor. 
+# In the OpenPLC Open Project dialog, navigate to /editor-data (from root) to find the plc_lab_03 folder. 
 
 
 #----------------------------------------------------------------------#
@@ -56,6 +71,7 @@ newgrp docker   # Refreshes list
 # Compose.yaml settings
 command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_arm:=true use_base:=false use_moveit:=true use_nav2:=false use_rviz:=tru
 ROS_DOMAIN_ID=3
+
 
 #----------------------------------------------------------------------#
 # Git commands
