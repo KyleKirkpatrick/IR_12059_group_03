@@ -7,7 +7,7 @@ class PineappleGossipBot(Node):
         super().__init__('pineapple_gossip_bot')
         # Node name
         # Create publisher: topic_name, message_type, queue_size
-        self.publisher_ = self.create_publisher(String, 'warehouse_tea_spill',10)
+        self.publisher_ = self.create_publisher(String, 'status_updates',10)
         # Timer to publish every 0.5 seconds
         timer_period = 0.5
         self.timer = self.create_timer(timer_period, self.timer_callback)
