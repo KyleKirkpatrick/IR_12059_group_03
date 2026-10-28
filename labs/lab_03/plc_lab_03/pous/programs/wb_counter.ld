@@ -1646,7 +1646,7 @@ PROGRAM wb_counter
           "dragging": false
         },
         {
-          "id": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+          "id": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
           "type": "block",
           "position": {
             "x": 257,
@@ -1875,9 +1875,9 @@ PROGRAM wb_counter
                 "right": 0
               }
             },
-            "numericId": "2845636",
+            "numericId": "6195352",
             "variant": {
-              "name": "GE",
+              "name": "GT",
               "type": "function",
               "language": "st",
               "variables": [
@@ -1961,14 +1961,14 @@ PROGRAM wb_counter
                 "handleId": "OUT",
                 "type": "output",
                 "variable": {
-                  "id": "",
                   "name": "IsMed",
+                  "class": "local",
                   "type": {
                     "definition": "base-type",
                     "value": "BOOL"
                   },
-                  "class": "local",
-                  "location": "",
+                  "location": "%MX0.1",
+                  "initialValue": null,
                   "documentation": "",
                   "debug": false
                 }
@@ -2079,7 +2079,7 @@ PROGRAM wb_counter
           "dragging": false
         },
         {
-          "id": "VARIABLE_89baafef-65c8-446d-b31c-176e073bc834",
+          "id": "VARIABLE_dc5bff61-e4ce-4bbe-99c2-983d7814894a",
           "type": "variable",
           "position": {
             "x": 147,
@@ -2139,7 +2139,7 @@ PROGRAM wb_counter
               "isConnectable": false,
               "type": "source"
             },
-            "numericId": "5172431",
+            "numericId": "7495271",
             "variable": {
               "name": "Weight_sensor",
               "class": "local",
@@ -2155,7 +2155,7 @@ PROGRAM wb_counter
             "executionOrder": 0,
             "variant": "input",
             "block": {
-              "id": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+              "id": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
               "handleId": "IN1",
               "variableType": {
                 "name": "IN1",
@@ -2177,7 +2177,7 @@ PROGRAM wb_counter
           "dragging": false
         },
         {
-          "id": "VARIABLE_97e86c64-294c-43b3-b33d-62e473186d35",
+          "id": "VARIABLE_1758a3ad-397f-4dbd-b98d-22d5bc5c1f71",
           "type": "variable",
           "position": {
             "x": 147,
@@ -2237,14 +2237,14 @@ PROGRAM wb_counter
               "isConnectable": false,
               "type": "source"
             },
-            "numericId": "3490696",
+            "numericId": "7839894",
             "variable": {
               "name": "5"
             },
             "executionOrder": 0,
             "variant": "input",
             "block": {
-              "id": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+              "id": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
               "handleId": "IN2",
               "variableType": {
                 "name": "IN2",
@@ -2266,7 +2266,7 @@ PROGRAM wb_counter
           "dragging": false
         },
         {
-          "id": "VARIABLE_c7a5a3e7-e70f-481b-9b78-0cf1297afb54",
+          "id": "VARIABLE_f35c31c6-2b34-4ca3-a718-4ec2f722adcb",
           "type": "variable",
           "position": {
             "x": 377,
@@ -2326,23 +2326,23 @@ PROGRAM wb_counter
               "isConnectable": false,
               "type": "target"
             },
-            "numericId": "6758603",
+            "numericId": "7037966",
             "variable": {
-              "id": "",
               "name": "IsMed",
+              "class": "local",
               "type": {
                 "definition": "base-type",
                 "value": "BOOL"
               },
-              "class": "local",
-              "location": "",
+              "location": "%MX0.1",
+              "initialValue": null,
               "documentation": "",
               "debug": false
             },
             "executionOrder": 0,
             "variant": "output",
             "block": {
-              "id": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+              "id": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
               "handleId": "OUT",
               "variableType": {
                 "name": "OUT",
@@ -2366,15 +2366,15 @@ PROGRAM wb_counter
       ],
       "edges": [
         {
-          "id": "e_CONTACT_f0d5eea4-edf3-4513-b84c-b7912a9919b7_BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04__output_IN1",
+          "id": "e_CONTACT_f0d5eea4-edf3-4513-b84c-b7912a9919b7_BLOCK_f764e493-7873-408b-a80e-8077e13ecce4__output_IN1",
           "source": "CONTACT_f0d5eea4-edf3-4513-b84c-b7912a9919b7",
-          "target": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+          "target": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
           "sourceHandle": "output",
           "targetHandle": "EN"
         },
         {
-          "id": "e_BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04_right-rail-rung_wb_counter_d7184819-56d2-4040-97a0-010aa54815f1__OUT_right-rail",
-          "source": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+          "id": "e_BLOCK_f764e493-7873-408b-a80e-8077e13ecce4_right-rail-rung_wb_counter_d7184819-56d2-4040-97a0-010aa54815f1__OUT_right-rail",
+          "source": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
           "target": "right-rail-rung_wb_counter_d7184819-56d2-4040-97a0-010aa54815f1",
           "sourceHandle": "ENO",
           "targetHandle": "right-rail"
@@ -2387,23 +2387,23 @@ PROGRAM wb_counter
           "targetHandle": "input"
         },
         {
-          "id": "e_VARIABLE_89baafef-65c8-446d-b31c-176e073bc834_BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04__output_IN1",
-          "source": "VARIABLE_89baafef-65c8-446d-b31c-176e073bc834",
-          "target": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+          "id": "e_VARIABLE_dc5bff61-e4ce-4bbe-99c2-983d7814894a_BLOCK_f764e493-7873-408b-a80e-8077e13ecce4__output_IN1",
+          "source": "VARIABLE_dc5bff61-e4ce-4bbe-99c2-983d7814894a",
+          "target": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
           "sourceHandle": "output",
           "targetHandle": "IN1"
         },
         {
-          "id": "e_VARIABLE_97e86c64-294c-43b3-b33d-62e473186d35_BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04__output_IN2",
-          "source": "VARIABLE_97e86c64-294c-43b3-b33d-62e473186d35",
-          "target": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
+          "id": "e_VARIABLE_1758a3ad-397f-4dbd-b98d-22d5bc5c1f71_BLOCK_f764e493-7873-408b-a80e-8077e13ecce4__output_IN2",
+          "source": "VARIABLE_1758a3ad-397f-4dbd-b98d-22d5bc5c1f71",
+          "target": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
           "sourceHandle": "output",
           "targetHandle": "IN2"
         },
         {
-          "id": "e_BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04_VARIABLE_c7a5a3e7-e70f-481b-9b78-0cf1297afb54__OUT_input",
-          "source": "BLOCK_560743a5-faf9-4a41-8876-5b46bd9b2b04",
-          "target": "VARIABLE_c7a5a3e7-e70f-481b-9b78-0cf1297afb54",
+          "id": "e_BLOCK_f764e493-7873-408b-a80e-8077e13ecce4_VARIABLE_f35c31c6-2b34-4ca3-a718-4ec2f722adcb__OUT_input",
+          "source": "BLOCK_f764e493-7873-408b-a80e-8077e13ecce4",
+          "target": "VARIABLE_f35c31c6-2b34-4ca3-a718-4ec2f722adcb",
           "sourceHandle": "OUT",
           "targetHandle": "input"
         }
@@ -9604,13 +9604,6 @@ PROGRAM wb_counter
                 }
               },
               {
-                "handleId": "PT",
-                "type": "input",
-                "variable": {
-                  "name": "T#3s"
-                }
-              },
-              {
                 "handleId": "Q",
                 "type": "output",
                 "variable": {
@@ -9624,6 +9617,13 @@ PROGRAM wb_counter
                   "initialValue": null,
                   "documentation": "",
                   "debug": false
+                }
+              },
+              {
+                "handleId": "PT",
+                "type": "input",
+                "variable": {
+                  "name": "T#3500ms"
                 }
               }
             ],
@@ -9893,7 +9893,7 @@ PROGRAM wb_counter
             },
             "numericId": "9610098",
             "variable": {
-              "name": "T#3s"
+              "name": "T#3500ms"
             },
             "executionOrder": 0,
             "variant": "input",
@@ -10611,13 +10611,6 @@ PROGRAM wb_counter
                 }
               },
               {
-                "handleId": "PT",
-                "type": "input",
-                "variable": {
-                  "name": "T#4s"
-                }
-              },
-              {
                 "handleId": "Q",
                 "type": "output",
                 "variable": {
@@ -10631,6 +10624,13 @@ PROGRAM wb_counter
                   "initialValue": null,
                   "documentation": "",
                   "debug": false
+                }
+              },
+              {
+                "handleId": "PT",
+                "type": "input",
+                "variable": {
+                  "name": "T#5s"
                 }
               }
             ],
@@ -10900,7 +10900,7 @@ PROGRAM wb_counter
             },
             "numericId": "2472572",
             "variable": {
-              "name": "T#4s"
+              "name": "T#5s"
             },
             "executionOrder": 0,
             "variant": "input",
