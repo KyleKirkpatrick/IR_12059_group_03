@@ -118,3 +118,49 @@ ros2 run pa_warehouse_status pineapple_gossip_bot
 ros2 node list # See all active nodes
 ros2 topic info /status_updates # Get topic information
 ros2 interface show std_msgs/String # Examine message structure
+
+
+#----------------------------------------------------------------------#
+# Code server commands
+#----------------------------------------------------------------------#
+
+# You can connect to the code server on the Omron workspace by either
+# using the web portal or by connecting desktop VS Code to the container. 
+
+# Open the web portal (type in browser while container is running)
+localhost:8080
+
+# Alternatively, connect to the code server using VS Code desktop. 
+# Benefits: 
+#   - don't have to sign in to Github every time. 
+#   - better contextual auto-complete in terminal
+#   - copy & paste easily
+#   - full vs code; saved settings
+# Issues:
+#   - Bash terminal may need additional setup to access ROS commands
+#
+# Instructions:
+# 1. Open VS Code and install 'Dev Containers' extension. 
+# 2. Run the docker container
+# 3. Use the command palette (Ctrl + Shift + P) and select:
+#   Dev Containers: Attach to Running Container
+# 4. Select omron-workspace-1
+# 5. It will take some time to connect to the container. 
+# 6. Open the workspace folder /workspace/irs_ws
+# 7. [Optional] Go to File > Add Folder to Workspace...
+#   Select the group repo IR_12059_group_03
+#   This lets you push/pull from git in the same workspace. 
+# 8. Open a terminal (Ctrl + Shift + `). 
+#   Select "irs_ws" as the source. 
+# 9. Add ROS commands to the bash environment. 
+source /opt/ros/jazzy/setup.bash
+
+# To have those commands available in every new terminal 
+# (in this context), add the ros source to bashrc
+echo 'source /opt/ros/jazzy/setup.bash' >> ~/.bashrc
+
+# If you haven't yet, run colcon build to build the scripts
+cd ~/irs_ws
+colcon build
+
+# and 
