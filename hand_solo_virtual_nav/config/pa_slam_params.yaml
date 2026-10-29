@@ -1,39 +1,27 @@
 slam_toolbox:
   ros__parameters:
-    mode: localisation
-    use_map_saver: True
-    use_scan_matching: True
-    #do_icp_step: True
+    mode: mapping
+    use_map_saver: true
+    use_scan_matching: true
 
     # Keyframe / node creation
     minimum_travel_distance: 0.5
     minimum_travel_heading: 0.5
     map_update_interval: 5.0
-    #use_map_saver: True
 
-    # Loop closure
-    do_loop_closing: True
-    loop_search_maximum_distance: 8.0
-
+    # Loop closure (real slam_toolbox names; defaults shown where unchanged)
+    do_loop_closing: true
+    loop_search_maximum_distance: 8.0           # default 3.0. This is what loop_search_max_radius was aiming for
     loop_match_minimum_chain_size: 10           # default
     loop_match_minimum_response_coarse: 0.35    # default. Lower = more loop closures but more false ones
-    loop_match_minimum_response_fine: 0.45   
-
-   # loop_closure_threshold: 0.30
-    #loop_search_max_keyframes: 200
-    #loop_search_max_radius: 8.0
-    #minimum_time_between_loop_closures: 5.0
-
-    # ICP robustness
-    icp_max_iterations: 50
-    icp_slowdown_ratio: 0.9
+    loop_match_minimum_response_fine: 0.45      # default
 
     # Frames
     odom_frame: virtual_hand_solo/odom
     map_frame: map
     base_frame: virtual_hand_solo/base_link
-    scan_topic: virtual_hand_solo/scan
+    scan_topic: /virtual_hand_solo/scan         # leading slash added
 
-    # Laser sanity (adjust to your sim)
+    # Laser range (set max to your lidar's real max range)
     max_laser_range: 20.0
     min_laser_range: 0.05

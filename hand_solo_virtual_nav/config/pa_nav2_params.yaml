@@ -38,7 +38,12 @@ amcl:
     z_rand: 0.5
     z_short: 0.05
     set_initial_pose: True
-    initial_pose: [0.0, 0.0, 0.0, 0.0]
+    #initial_pose: [0.0, 0.0, 0.0, 0.0]
+    initial_pose:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      yaw: 0.0
     scan_topic: /virtual_hand_solo/scan
 
 bt_navigator:
@@ -135,7 +140,7 @@ local_costmap:
       width: 3                     # CHANGED (slide 7.5.3), was 5
       height: 3                    # CHANGED (slide 7.5.3), was 5
       resolution: 0.05
-      robot_radius: 0.22           # CHANGED to match global costmap (not on slide), was 0.5
+      robot_radius: 0.5           
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
