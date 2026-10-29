@@ -113,10 +113,7 @@ colcon build --packages-select pa_warehouse_status
 source install/local_setup.bash
 ros2 run pa_warehouse_status pineapple_gossip_bot
 
-cd ~/irs_ws
-colcon build --packages-select pa_warehouse_status
-source install/local_setup.bash
-ros2 run pa_warehouse_status pineapple_gossip_bot
+ros2 run hand_solo_virtual_nav hs_waypoint_follower
 
 ros2 node list # See all active nodes
 ros2 topic info /status_updates # Get topic information
