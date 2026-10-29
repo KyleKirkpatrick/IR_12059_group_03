@@ -75,6 +75,9 @@ newgrp docker   # Refreshes list
 command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_arm:=true use_base:=false use_moveit:=true use_nav2:=false use_rviz:=tru
 ROS_DOMAIN_ID=3
 
+# Copy file from inside docker container to your local machine
+docker cp omron_handsolo:/omron_ws/install/tm_description/share/tm_description/xacro [destination]
+
 
 #----------------------------------------------------------------------#
 # Git commands
@@ -163,4 +166,5 @@ echo 'source /opt/ros/jazzy/setup.bash' >> ~/.bashrc
 cd ~/irs_ws
 colcon build
 
-# and 
+# and add the new scripts to your source so you can run them
+source install/local_setup.bash
