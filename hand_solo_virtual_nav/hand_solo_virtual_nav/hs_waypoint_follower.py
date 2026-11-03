@@ -60,7 +60,7 @@ def main():
         #Box C location
         ('wp3',  1.18,  0.0802,  -0.00143, 5.0),
         #Box dropoff location
-        ('wp4',  30.1,  -6.35,  0.00253, 5.0),
+        ('wp4',  30.027,  -5.406,  -1.696, 5.0),
     ]
 
     node.get_logger().info('Waiting for Nav2 action server...')
