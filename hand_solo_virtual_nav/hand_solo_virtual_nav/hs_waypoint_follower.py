@@ -53,14 +53,11 @@ def main():
 
     # ---- Your waypoints: (name, x, y, yaw in radians, seconds to wait) ----
     waypoints = [
-        #Box A location
-        ('wp1', 1.56, -0.562, -0.00143, 5.0),
-        #Box B location
-        ('wp2',  1.28, -0.0802, -0.00134, 5.0),
-        #Box C location
-        ('wp3',  1.18,  0.0802,  -0.00143, 5.0),
-        #Box dropoff location
+        ('wp1',  1.706, -0.539, -0.246, 5.0),
+        ('wp2',  1.486, 0.010, -0.036, 5.0),
+        ('wp3',  1.481,  0.396, 0.077, 5.0),
         ('wp4',  30.027,  -5.406,  -1.696, 5.0),
+
     ]
 #             ('home',      0.0,   0.0,    0.0,      10),
 #             ('pickup_A_closer',  2.41, -1.24, 0.0, 5.0),
