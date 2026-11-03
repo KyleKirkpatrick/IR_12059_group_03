@@ -263,9 +263,8 @@ class PineappleNavigator(Node):
         # print to console
         self.robot_active = True
         self.get_logger().info('Going to pickup A...')
-        self.send_and_wait_arm('carry')
-        self.go_to_waypoint('pickup_A')
         self.send_and_wait_arm('pick')
+        self.go_to_waypoint('pickup_A')
         time.sleep(2)
 
         # First check
@@ -288,9 +287,8 @@ class PineappleNavigator(Node):
         # print to console
         self.robot_active = True
         self.get_logger().info('Going to pickup B...')
-        self.send_and_wait_arm('carry')
-        self.go_to_waypoint('pickup_B')
         self.send_and_wait_arm('pick')
+        self.go_to_waypoint('pickup_B')
 
         # First check
         if self.box_on_conveyor:
@@ -312,9 +310,8 @@ class PineappleNavigator(Node):
         # print to console
         self.robot_active = True
         self.get_logger().info('Going to pickup C...')
-        self.send_and_wait_arm('carry')
-        self.go_to_waypoint('pickup_C')
         self.send_and_wait_arm('pick')
+        self.go_to_waypoint('pickup_C')
 
         # First check
         if self.box_on_conveyor:
