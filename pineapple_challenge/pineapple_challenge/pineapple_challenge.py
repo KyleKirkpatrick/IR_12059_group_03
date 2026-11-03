@@ -36,10 +36,11 @@ class PineappleNavigator(Node):
             ('pickup_A',  1.56, -0.562, -0.00143, 2.0),
             ('pickup_A_closer',  2.41, -1.24, 1.0, 2.0),
             ('pickup_B',  1.28, -0.0802, -0.00134, 2.0),
-            ('pickup_B_closer',  2.41, -1.24, 1.0, 2.0),
+            ('pickup_B_closer',  1.28, -1.24, 1.0, 2.0),
             ('pickup_C',  1.18,  0.0802, -0.00143, 2.0),
-            ('pickup_C_closer',  2.41, -1.24, 1.0, 2.0),
+            ('pickup_C_closer',  1.18, -1.24, 1.0, 2.0),
             ('dropoff',  30.027,  -5.406,  -1.696, 2.0),
+            ('dropoff_alt', 31.027,  -6.406,  -1.696, 2.0)
         ]
 
         # Subscription to HMI information
@@ -336,6 +337,9 @@ class PineappleNavigator(Node):
         self.send_and_wait_arm('carry')
         self.go_to_waypoint('dropoff')
         self.send_and_wait_arm('place')
+        time.sleep(2)
+        self.go_to_waypoint('dropoff_alt')
+        self.robot_holding_box = False
         self.robot_active = False
 
     # State machine
