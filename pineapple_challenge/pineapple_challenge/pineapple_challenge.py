@@ -22,6 +22,7 @@ class PineappleNavigator(Node):
         # Robot flags
         self.robot_holding_box = False
         self.robot_stuck = False
+        self.robot_active = False
         self.box_on_conveyor = False
         self.box_zone = 0
 
@@ -31,7 +32,7 @@ class PineappleNavigator(Node):
         )
 
         self.waypoints = [
-            ('home',      0.0,   0.0,    0.0,      5.0),
+            ('home',      0.0,   0.0,    0.0,      10),
             ('pickup_A',  1.56, -0.562, -0.00143, 5.0),
             ('pickup_B',  1.28, -0.0802, -0.00134, 5.0),
             ('pickup_C',  1.18,  0.0802, -0.00143, 5.0),
@@ -238,60 +239,76 @@ class PineappleNavigator(Node):
         )
 
         if res.status == 4 and res.result.error_code.val == 1:
-            self.get_logger().info('Waypoint successfully executed!')
+            self.get_logger().info('Arm pose reached.')
             return True
 
-        self.get_logger().error('Waypoint execution failed.')
+        self.get_logger().error('Arm pose failed.')
         return False    
 
     def go_home(self):
-        # print to console
+        self.robot_active = True
         self.get_logger().info('Going home...')
         self.go_to_waypoint('home')
-        self.send_and_wait_arm('home')
+        self.send_and_wait_arm('carry')
+        self.robot_active = False
 
     def go_pickup_A(self):
         # print to console
+        self.robot_active = True
         self.get_logger().info('Going to pickup A...')
+        self.send_and_wait_arm('carry')
         self.go_to_waypoint('pickup_A')
         self.send_and_wait_arm('pick')
+        self.robot_active = False
 
     def go_pickup_B(self):
         # print to console
+        self.robot_active = True
         self.get_logger().info('Going to pickup B...')
+        self.send_and_wait_arm('carry')
         self.go_to_waypoint('pickup_B')
         self.send_and_wait_arm('pick')
+        self.robot_active = False
 
     def go_pickup_C(self):
         # print to console
+        self.robot_active = True
         self.get_logger().info('Going to pickup C...')
+        self.send_and_wait_arm('carry')
         self.go_to_waypoint('pickup_C')
         self.send_and_wait_arm('pick')
+        self.robot_active = False
 
     def go_dropoff(self):
         # print to console
+        self.robot_active = True
         self.get_logger().info('Going to dropoff...')
+        self.send_and_wait_arm('carry')
         self.go_to_waypoint('dropoff')
         self.send_and_wait_arm('place')
+        self.robot_active = False
 
     # State machine
     def run(self):
         while rclpy.ok():
             rclpy.spin_once(self)
+            
             if self.robot_stuck:
                 self.get_logger().warn('Robot is stuck!')
                 self.go_home()
-            if not self.robot_holding_box and self.box_on_conveyor and self.box_zone > 0:
-                if self.box_zone == 1:
-                    self.go_pickup_A()
-                elif self.box_zone == 2:
-                    self.go_pickup_B()
-                elif self.box_zone == 3:
-                    self.go_pickup_C()
-            elif self.robot_holding_box:
-                self.go_dropoff()
-            else:
-                self.go_home()
+
+            if not self.robot_active:
+                if not self.robot_holding_box and self.box_on_conveyor and self.box_zone > 0:
+                    if self.box_zone == 1:
+                        self.go_pickup_A()
+                    elif self.box_zone == 2:
+                        self.go_pickup_B()
+                    elif self.box_zone == 3:
+                        self.go_pickup_C()
+                elif self.robot_holding_box:
+                    self.go_dropoff()
+                else:
+                    self.go_home()
 
 
 def main():
