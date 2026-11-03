@@ -78,6 +78,9 @@ ROS_DOMAIN_ID=3
 # Copy file from inside docker container to your local machine
 docker cp omron_handsolo:/omron_ws/install/tm_description/share/tm_description/xacro [destination]
 
+# Restart when poses stop working
+docker restart omron_handsolo irs_world-irs-simulation-1
+# Also close Unity-- it will restart
 
 #----------------------------------------------------------------------#
 # Git commands
