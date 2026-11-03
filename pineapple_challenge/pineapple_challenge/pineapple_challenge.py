@@ -80,6 +80,8 @@ class PineappleNavigator(Node):
                     weight_str = weight_str[:-2]
                 if weight_str.startswith(": "):
                     weight_str = weight_str[2:]
+                if "\n" in weight_str:
+                    weight_str = "0"
             else:
                 weight_str = "0"
             box_weight : float = float(weight_str)  
@@ -89,6 +91,8 @@ class PineappleNavigator(Node):
             if isinstance(box_location, str):
                 if box_location.startswith(": "):
                     box_location = box_location[2:]
+                if "\n" in box_location:
+                    box_location = ""
             else:
                 box_location = ""
 
