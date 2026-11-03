@@ -72,7 +72,7 @@ sudo usermod -aG docker $USER
 newgrp docker   # Refreshes list
 
 # Compose.yaml settings
-command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_arm:=true use_base:=false use_moveit:=true use_nav2:=false use_rviz:=tru
+command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_arm:=true use_base:=false use_moveit:=true use_nav2:=false use_rviz:=true
 ROS_DOMAIN_ID=3
 
 # Copy file from inside docker container to your local machine

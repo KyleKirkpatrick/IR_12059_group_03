@@ -13,12 +13,16 @@ from rclpy.node import Node
 from std_msgs.msg import String
 import json
 
-# Robot status flags
-robot_holding_box = False
-robot_stuck = False
-box_on_conveyor = False
 
 class PineappleNavigator(Node):
+
+    # Robot status flags 
+    global robot_holding_box, robot_stuck, box_on_conveyor, box_zone
+    robot_holding_box = False
+    robot_stuck = False
+    box_on_conveyor = False
+    box_zone = 0
+
     def __init__(self):
         super().__init__('pineapple_navigator')
 
@@ -29,27 +33,65 @@ class PineappleNavigator(Node):
             self.listener_callback,
             10)
 
+        # Run the state machine
+        self.run()
+
     def listener_callback(self, msg):
-            try:
-                data = json.loads(msg.data) # parse JSON string into Python dict
-                stamp = data["stamp"]
-                box = data["box"]
-                counts = data["counts"]
-    
-                print("Received PLC status:")
-                print(f" Time: {stamp['sec']}.{stamp['nanosec']}")
-                print(f" Box weight raw={box['weight_raw']}")
-                print(f" Location: {box['location']}")
-                print(f" Counts: big={counts['big']}, medium={counts['medium']}, "f"small={counts['small']}, total={counts['total']}")
-                print() # empty line at the end
+        global box_on_conveyor, box_zone
 
-                if box['weight_raw'] > 0:
-                    box_on_conveyor = True
-                else:
-                    box_on_conveyor = False
+        try:
+            data = json.loads(msg.data) # parse JSON string into Python dict
+            time_stamp :float = float(data["stamp"].get("sec", 0)) + float(data["stamp"].get("nanosec", 0)) * 1e-9
 
-            except Exception as e:
-                self.get_logger().error(f"Failed to parse JSON: {e}\nRaw msg={msg.data}")
+            # Remove "kg" from the weight string
+            weight_str = data["box"].get("weight_raw", "0")
+            if isinstance(weight_str, str):
+                if weight_str.endswith("kg"):
+                    weight_str = weight_str[:-2]
+                if weight_str.startswith(": "):
+                    weight_str = weight_str[2:]
+            else:
+                weight_str = "0"
+            box_weight : float = float(weight_str)  
+
+            # Remove any leading ": " from the location string
+            box_location : str = data["box"].get("location", "")
+            if isinstance(box_location, str):
+                if box_location.startswith(": "):
+                    box_location = box_location[2:]
+            else:
+                box_location = ""
+
+            counts = data["counts"]
+
+            # print("Received PLC status:")
+            # print(f" Time: {time_stamp}")
+            # print(f" Weight: {box_weight} kg")
+            # print(f" Location: {box_location}")
+            # print(f" Counts: big={counts['big']}, medium={counts['medium']}, "f"small={counts['small']}, total={counts['total']}")
+            # print() # empty line at the end
+
+        except Exception as e:
+            self.get_logger().error(f"Failed to parse JSON: {e}\nRaw msg={msg.data}")
+
+        if box_weight > 0:
+            if not box_on_conveyor:
+                self.get_logger().info('Box detected on conveyor.')
+            box_on_conveyor = True
+        else:
+            if box_on_conveyor:
+                self.get_logger().info('Box removed from conveyor.')
+            box_on_conveyor = False
+
+        # Determine box zone based on location
+        if box_location == "A":
+            box_zone = 1
+        elif box_location == "B":
+            box_zone = 2
+        elif box_location == "C":
+            box_zone = 3
+        else:
+            box_zone = 0
 
     def make_pose(self, x: float, y: float, yaw: float) -> PoseStamped:
         """x, y in metres, yaw in RADIANS, all in the 'map' frame."""
@@ -92,13 +134,31 @@ class PineappleNavigator(Node):
         # print to console
         self.get_logger().info('Going to dropoff...')
 
+    # State machine
+    def run(self):
+        global robot_holding_box, robot_stuck, box_on_conveyor, box_zone
+        while rclpy.ok():
+            rclpy.spin_once(self)
+            if robot_stuck:
+                self.get_logger().warn('Robot is stuck!')
+                self.go_home()
+            if not robot_holding_box and box_on_conveyor and box_zone > 0:
+                if box_zone == 1:
+                    self.go_pickup_A()
+                elif box_zone == 2:
+                    self.go_pickup_B()
+                elif box_zone == 3:
+                    self.go_pickup_C()
+            elif robot_holding_box:
+                self.go_dropoff()
+            else:
+                self.go_home()
 
 
 def main():
     rclpy.init()
     
     pineapple_navigator = PineappleNavigator()  # Create an instance of the PineappleNavigator node
-    rclpy.spin(pineapple_navigator)        # Keep the node alive to process callbacks
     try:
         pineapple_navigator.run()
     except KeyboardInterrupt:
