@@ -7,7 +7,7 @@ services:
       - QT_X11_NO_MITSHM=1                # GUI related
       - NVIDIA_VISIBLE_DEVICES=all        # GUI related
       - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
-      - ROS_DOMAIN_ID=0
+      - ROS_DOMAIN_ID=3
     restart: unless-stopped
     privileged: true
     network_mode: host
@@ -17,14 +17,14 @@ services:
   omron_handsolo:
     container_name: omron_handsolo
     image: ghcr.io/collaborativeroboticslab/omron_handsolo:jazzy
-    command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=true use_arm:=true use_base:=true use_moveit:=true use_nav2:=true use_rviz:=true
+    command: ros2 launch handsolo_ros handsolo.launch.py tm_use_simulation:=false use_arm:=true use_base:=true use_moveit:=true use_nav2:=false use_rviz:=true
     environment:
       - PYTHONUNBUFFERED=1                # GUI related
       - DISPLAY                           # GUI related
       - QT_X11_NO_MITSHM=1                # GUI related
       - NVIDIA_VISIBLE_DEVICES=all        # GUI related
       - NVIDIA_DRIVER_CAPABILITIES=all    # GUI related
-      - ROS_DOMAIN_ID=0
+      - ROS_DOMAIN_ID=3
     restart: unless-stopped
     privileged: true
     network_mode: host
@@ -36,7 +36,7 @@ services:
     image: ghcr.io/collaborativeroboticslab/omron-workspace:jazzy
     environment:
       - DISPLAY
-      - ROS_DOMAIN_ID=0
+      - ROS_DOMAIN_ID=3
       - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp   # match sim/handsolo (image default is fastrtps)
       - ROS_DISCOVERY_SERVER=                   # clear image default 127.0.0.1:11811 (no server exists)
       - NO_AT_BRIDGE=1
