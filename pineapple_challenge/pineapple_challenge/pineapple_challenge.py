@@ -35,8 +35,37 @@ def go_home():
     # print to console
     node.get_logger().info('Going home...')
 
+def go_coveyor():
+    # print to console
+    node.get_logger().info('Going to the coveyor...')
+
+def go_pickup_A():
+    # print to console
+    node.get_logger().info('Going to pickup A...')
+
+def go_pickup_B():
+    # print to console
+    node.get_logger().info('Going to pickup B...')
+
+def go_pickup_C():
+    # print to console
+    node.get_logger().info('Going to pickup C...')
+
+def go_dropoff():
+    # print to console
+    node.get_logger().info('Going to dropoff...')
+
+
 def main():
+    rclpy.init()
+    global node  # Declare the node as a global variable so it can be accessed in other functions
+    node = rclpy.create_node('pineapple_challenge')
+
     go_home()
+
+    rclpy.spin(node)        # Keep the node alive to process callbacks
+    node.destroy_node()     # Destroy the node after spinning
+    rclpy.shutdown()        # Shutdown the ROS client library
 
 
 if __name__ == '__main__':

@@ -105,8 +105,7 @@ ros2 topic info /joint_states -v
 
 ros2 interface show sensor_msgs/msg/JointState
 
-ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name
-pineapple_gossip_bot pa_warehouse_status
+ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name pineapple_gossip_bot pa_warehouse_status
 
 cd ~/irs_ws
 colcon build --packages-select pa_warehouse_status
