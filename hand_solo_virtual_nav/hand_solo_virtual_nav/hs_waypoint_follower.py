@@ -53,9 +53,12 @@ def main():
 
     # ---- Your waypoints: (name, x, y, yaw in radians, seconds to wait) ----
     waypoints = [
-        ('wp1', 30.4, -0.716, -0.00134, 5.0),
-        ('wp2',  5.0, -0.04, -0.00134, 5.0),
-        ('wp3',  0.0,  0.0,  0.0, 5.0),
+        #Box A position
+        ('wp1', 1.56, -0.562, -0.00143, 5.0),
+        #Box B position
+        ('wp2',  1.28, -0.0802, -0.00134, 5.0),
+        #Box C position
+        ('wp3',  1.18,  0.0802,  -0.00143, 5.0),
     ]
 
     node.get_logger().info('Waiting for Nav2 action server...')
