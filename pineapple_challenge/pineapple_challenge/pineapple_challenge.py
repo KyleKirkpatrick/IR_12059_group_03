@@ -36,7 +36,7 @@ class PineappleNavigator(Node):
             ('pickup_A',  1.56, -0.562, -0.00143, 5.0),
             ('pickup_B',  1.28, -0.0802, -0.00134, 5.0),
             ('pickup_C',  1.18,  0.0802, -0.00143, 5.0),
-            ('dropoff',  30.1,  -6.35,   0.00253, 5.0),
+            ('dropoff',  30.027,  -5.406,  -1.696, 5.0),
         ]
 
         # Subscription to HMI information
