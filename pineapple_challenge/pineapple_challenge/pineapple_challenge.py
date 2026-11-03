@@ -34,6 +34,7 @@ class PineappleNavigator(Node):
         self.waypoints = [
             ('home',      0.0,   0.0,    0.0,      10),
             ('pickup_A',  1.56, -0.562, -0.00143, 5.0),
+            ('pickup_A_closer',  2.41, -1.24, 0.0, 5.0),
             ('pickup_B',  1.28, -0.0802, -0.00134, 5.0),
             ('pickup_C',  1.18,  0.0802, -0.00143, 5.0),
             ('dropoff',  30.027,  -5.406,  -1.696, 5.0),
@@ -259,6 +260,13 @@ class PineappleNavigator(Node):
         self.send_and_wait_arm('carry')
         self.go_to_waypoint('pickup_A')
         self.send_and_wait_arm('pick')
+        time.sleep(2)
+        if self.box_on_conveyor:
+            self.go_to_waypoint('pickup_A_closer')
+            time.sleep(2)
+        if self.box_on_conveyor:
+            self.send_and_wait_arm('pick')
+            time.sleep(2)
         self.robot_active = False
 
     def go_pickup_B(self):

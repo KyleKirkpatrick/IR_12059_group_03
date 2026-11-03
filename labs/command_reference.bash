@@ -108,9 +108,9 @@ ros2 interface show sensor_msgs/msg/JointState
 ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name pineapple_gossip_bot pa_warehouse_status
 
 cd ~/irs_ws
-colcon build --packages-select pa_warehouse_status
+colcon build --packages-select pineapple_challenge
 source install/local_setup.bash
-ros2 run pa_warehouse_status pineapple_gossip_bot
+ros2 run pineapple_challenge pineapple_challenge
 
 ros2 run hand_solo_virtual_nav hs_waypoint_follower
 
