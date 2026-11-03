@@ -62,7 +62,13 @@ def main():
         #Box dropoff location
         ('wp4',  30.027,  -5.406,  -1.696, 5.0),
     ]
-
+#             ('home',      0.0,   0.0,    0.0,      10),
+#             ('pickup_A_closer',  2.41, -1.24, 0.0, 5.0),
+#             ('pickup_A',  1.706, -0.539, -0.246, 5.0),
+#             ('pickup_B',  1.486, 0.010, -0.036, 5.0),
+#             ('pickup_C',  1.481,  0.396, 0.077, 5.0),
+#             ('dropoff',  30.027,  -5.406,  -1.696, 5.0),
+# >>>>>>> ddbb691 (good waypoints
     node.get_logger().info('Waiting for Nav2 action server...')
     client.wait_for_server()
 

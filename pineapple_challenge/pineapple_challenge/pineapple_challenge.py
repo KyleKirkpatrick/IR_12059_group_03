@@ -41,6 +41,8 @@ class PineappleNavigator(Node):
             ('pickup_C_closer',  1.18, -1.24, 1.0, 2.0),
             ('dropoff',  30.027,  -5.406,  -1.696, 2.0),
             ('dropoff_alt', 31.027,  -6.406,  -1.696, 2.0)
+
+
         ]
 
         # Subscription to HMI information
