@@ -48,80 +48,83 @@ class HSWaypointRunner(Node):
         goal.planning_options.plan_only = False  # plan + execute
         return goal
     
-    # def _send_and_wait(self, joints: List[float]) -> bool:
-
-    #     self.get_logger().info(f'Sending waypoint: {joints}')
-
-    #     goal = self._goal_from_joints(joints)
-
-    #     send_fut = self.client.send_goal_async(goal)
-
-    #     rclpy.spin_until_future_complete(self, send_fut)
-
-    #     handle = send_fut.result()
-
-    #     if not handle:
-    #         self.get_logger().error('No response received from MoveIt.')
-    #     return False
-
-    #     if not handle.accepted:
-    #         self.get_logger().error('MoveIt rejected the goal.')
-    #     return False
-
-    #     self.get_logger().info('Goal accepted. Waiting for execution...')
-
-    #     res_fut = handle.get_result_async()
-
-    #     rclpy.spin_until_future_complete(self, res_fut)
-
-    #     res = res_fut.result()
-
-    #     if not res:
-    #         self.get_logger().error('No result received.')
-    #     return False
-
-    #     self.get_logger().info(
-    #         f'Action status: {res.status}'
-    #     )
-
-    #     self.get_logger().info(
-    #         f'MoveIt error code: {res.result.error_code.val}'
-    #     )
-
-    #     if res.status == 4 and res.result.error_code.val == 1:
-    #         self.get_logger().info('Waypoint successfully executed!')
-    #     return True
-
-    #     self.get_logger().error('Waypoint execution failed.')
-    #     return False
-
     def _send_and_wait(self, joints: List[float]) -> bool:
+
+        self.get_logger().info(f'Sending waypoint: {joints}')
+
         goal = self._goal_from_joints(joints)
+
         send_fut = self.client.send_goal_async(goal)
         rclpy.spin_until_future_complete(self, send_fut)
+
         handle = send_fut.result()
-        if not handle or not handle.accepted:
-            self.get_logger().error('Goal rejected.')
+
+        if not handle:
+            self.get_logger().error('No response received from MoveIt.')
             return False
+
+        if not handle.accepted:
+            self.get_logger().error('MoveIt rejected the goal.')
+            return False
+
+        self.get_logger().info('Goal accepted. Waiting for execution...')
+
         res_fut = handle.get_result_async()
         rclpy.spin_until_future_complete(self, res_fut)
+
         res = res_fut.result()
-        return bool(res and res.status == 4)  # 4 = STATUS_SUCCEEDED
+
+        if not res:
+            self.get_logger().error('No result received.')
+            return False
+
+        self.get_logger().info(f'Action status: {res.status}')
+        self.get_logger().info(
+            f'MoveIt error code: {res.result.error_code.val}'
+        )
+
+        if res.status == 4 and res.result.error_code.val == 1:
+            self.get_logger().info('Waypoint successfully executed!')
+            return True
+
+        self.get_logger().error('Waypoint execution failed.')
+        return False
+
+    # def _send_and_wait(self, joints: List[float]) -> bool:
+    #     goal = self._goal_from_joints(joints)
+    #     send_fut = self.client.send_goal_async(goal)
+    #     rclpy.spin_until_future_complete(self, send_fut)
+    #     handle = send_fut.result()
+    #     if not handle or not handle.accepted:
+    #         self.get_logger().error('Goal rejected.')
+    #         return False
+    #     res_fut = handle.get_result_async()
+    #     rclpy.spin_until_future_complete(self, res_fut)
+    #     res = res_fut.result()
+    #     return bool(res and res.status == 4)  # 4 = STATUS_SUCCEEDED
 
     
     def run(self):
+
+        self.get_logger().info('Starting waypoint sequence.')
+
         # Waypoint 1: Pick position
+        self.get_logger().info('Executing waypoint 1...')
+
         if not self._send_and_wait([
             0.0,
             math.radians(62.0),
             math.radians(42.0),
             0.0, 0.0, 0.0
         ]):
+            self.get_logger().error('Waypoint 1 failed. Stopping.')
             return
 
         time.sleep(5.0)
 
         # Waypoint 2: Carry position
+        self.get_logger().info('Executing waypoint 2...')
+
         if not self._send_and_wait([
             0.0,
             math.radians(-75.0),
@@ -129,24 +132,26 @@ class HSWaypointRunner(Node):
             math.radians(280.0),
             0.0, 0.0
         ]):
+            self.get_logger().error('Waypoint 2 failed. Stopping.')
             return
-        
+
         time.sleep(5.0)
 
+        # Waypoint 3: Place position
+        self.get_logger().info('Executing waypoint 3...')
 
-    # Waypoint 3: Place position
         if not self._send_and_wait([
-        0.0,
-        math.radians(43.0),
-        math.radians(46.0),
-        0.0, 0.0, 0.0
+            0.0,
+            math.radians(43.0),
+            math.radians(46.0),
+            0.0, 0.0, 0.0
         ]):
+            self.get_logger().error('Waypoint 3 failed. Stopping.')
             return
-        
+
         time.sleep(5.0)
 
-
-        self.get_logger().info('Sequence complete ✅')
+        self.get_logger().info('Sequence complete!')
 
 
 def main(args=None):
