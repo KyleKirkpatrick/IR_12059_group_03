@@ -35,12 +35,12 @@ class PineappleNavigator(Node):
             ('home',      0.0,   0.0,    0.0,      2.0),
             ('pickup_A',  1.56, -0.562, -0.00143, 2.0),
             ('pickup_A_closer',  2.41, -1.24, 1.0, 2.0),
-            ('pickup_B',  1.28, -0.0802, -0.00134, 2.0),
-            ('pickup_B_closer',  1.28, -1.24, 1.0, 2.0),
-            ('pickup_C',  1.18,  0.0802, -0.00143, 2.0),
-            ('pickup_C_closer',  1.18, -1.24, 1.0, 2.0),
-            ('dropoff',  30.027,  -5.406,  -1.696, 2.0),
-            ('dropoff_alt', 31.027,  -6.406,  -1.696, 2.0)
+            ('pickup_B',  1.486, 0.10, -0.036, 2.0),
+            ('pickup_B_closer',  3.16, -0.374, 1.0, 2.0),
+            ('pickup_C',  1.481,  0.396, 0.077, 2.0),
+            ('pickup_C_closer',  3.01, 0.445, 1.0, 2pr.0),
+            ('dropoff',  31.2,  -4.43,  -1.696, 2.0),
+            ('dropoff_alt', 31.8,  -4.32,  0.0, 2.0)
 
 
         ]
@@ -339,8 +339,9 @@ class PineappleNavigator(Node):
         self.send_and_wait_arm('carry')
         self.go_to_waypoint('dropoff')
         self.send_and_wait_arm('place')
-        time.sleep(2)
-        self.go_to_waypoint('dropoff_alt')
+        #time.sleep(2)
+        #self.go_to_waypoint('dropoff_alt')
+        self.send_and_wait_arm('carry')
         self.robot_holding_box = False
         self.robot_active = False
 
